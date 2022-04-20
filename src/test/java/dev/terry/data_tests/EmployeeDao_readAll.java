@@ -19,6 +19,6 @@ public class EmployeeDao_readAll {
 
         int allEmployeesCount = allEmployees.size();
 
-        Assertions.assertTrue(allEmployeesCount > 1);
+        Assertions.assertTrue(allEmployeesCount != 0);
     }
 }

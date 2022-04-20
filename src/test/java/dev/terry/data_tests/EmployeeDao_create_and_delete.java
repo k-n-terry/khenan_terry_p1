@@ -9,14 +9,14 @@ import org.junit.jupiter.api.*;
 import java.util.Random;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EmployeeDao_create_and_read {
+public class EmployeeDao_create_and_delete{
     static EmployeeDao employeeDao = new EmployeeDaoImpl();
     static Employee savedJohnSmithDao = new Employee();
 
     // theoretical fields; names are generated randomly
     Random r = new Random();
-    String fn = "John_"+Integer.toString(r.nextInt(99999)+1);
-    String ln = "Smith_"+Integer.toString(r.nextInt(99999)+1);
+    String fn = "Deleterius_"+Integer.toString(r.nextInt(99999)+1);
+    String ln = "Maximus_"+Integer.toString(r.nextInt(99999)+1);
     String kw = "HiFromIntelliJ";
 
     @Test
@@ -32,7 +32,7 @@ public class EmployeeDao_create_and_read {
         Employee johnSmithDao = employeeDao.createEmployee(johnSmith);
 
         // save johnSmithDao
-        EmployeeDao_create_and_read.savedJohnSmithDao = johnSmithDao;
+        EmployeeDao_create_and_delete.savedJohnSmithDao = johnSmithDao;
 
         // set theoretical ID value
         UniqueIdMD5 uniqueId = new UniqueIdMD5(johnSmith);
@@ -48,11 +48,10 @@ public class EmployeeDao_create_and_read {
     }
     @Test
     @Order(2)
-    void can_read_employee_row_by_id(){
-        // read the id from readEmployee obj.
-        Employee readEmployee = employeeDao.readEmployeeById(savedJohnSmithDao.getEmpId());
-        System.out.println(readEmployee.toString());
+    void can_delete_employee_row_by_id(){
+        System.out.println("Deleted employee{ "+savedJohnSmithDao.getEmpId()+" }");
 
-        Assertions.assertEquals(savedJohnSmithDao.getEmpId(), readEmployee.getEmpId());
+        boolean bool = employeeDao.deleteEmployeeById(savedJohnSmithDao.getEmpId());
+        Assertions.assertTrue(bool);
     }
 }

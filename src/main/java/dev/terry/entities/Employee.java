@@ -5,18 +5,18 @@ public class Employee{
     private String empId;
     private String firstname;
     private String lastname;
-    private String keyword;
+    private String passphrase;
 
     // no args constructor
     public Employee(){
     }
 
     // constructor
-    public Employee(String empId, String firstname, String lastname, String keyword){
+    public Employee(String empId, String firstname, String lastname, String passphrase){
         this.empId = empId;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.keyword = keyword;
+        this.passphrase = passphrase;
     }
 
     // getters
@@ -29,8 +29,8 @@ public class Employee{
     public String getLastname() {
         return this.lastname;
     }
-    public String getKeyword() {
-        return this.keyword;
+    public String getPassphrase() {
+        return this.passphrase;
     }
 
     // setters
@@ -43,8 +43,8 @@ public class Employee{
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void setPassphrase(String passphrase) {
+        this.passphrase = passphrase;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Employee{
                 "\temp_id=" + this.empId +"\n"+
                 "\tfirstname=" + this.firstname +"\n"+
                 "\tlastname=" + this.lastname +"\n"+
-                "\tpassword=" + this.keyword +"\n"+
+                "\tpassphrase=" + this.passphrase +"\n"+
                 '}';
     }
 }

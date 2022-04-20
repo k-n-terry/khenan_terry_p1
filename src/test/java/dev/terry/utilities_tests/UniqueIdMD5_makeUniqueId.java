@@ -22,8 +22,8 @@ import dev.terry.utilities.UniqueIdMD5;
         khenan.setLastname("Terry");
         brandon.setLastname("Terry");
         // password
-        khenan.setKeyword("abc123");
-        brandon.setKeyword("abc123");
+        khenan.setPassphrase("abc123");
+        brandon.setPassphrase("abc123");
 
         UniqueIdMD5 uniqueId_01 = new UniqueIdMD5(khenan);
         UniqueIdMD5 uniqueId_02 = new UniqueIdMD5(brandon);

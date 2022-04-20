@@ -14,7 +14,7 @@ public class UniqueIdMD5{
     public UniqueIdMD5(Employee employee){
         this.uniqueString.append(employee.getFirstname());
         this.uniqueString.append(employee.getLastname());
-        this.uniqueString.append(employee.getKeyword());
+        this.uniqueString.append(employee.getPassphrase());
     }
 
     public String makeUniqueId(){

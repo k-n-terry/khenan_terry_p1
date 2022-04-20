@@ -18,12 +18,12 @@ public class Employee_toString{
         johnSmith.setEmpId(ei.toUpperCase());
         johnSmith.setFirstname(fn);
         johnSmith.setLastname(ln);
-        johnSmith.setKeyword(kw);
+        johnSmith.setPassphrase(kw);
 
         System.out.println(johnSmith.toString());
         Assertions.assertEquals(johnSmith.getEmpId(), ei.toUpperCase());
         Assertions.assertEquals(johnSmith.getFirstname(), fn);
         Assertions.assertEquals(johnSmith.getLastname(), ln);
-        Assertions.assertEquals(johnSmith.getKeyword(), kw);
+        Assertions.assertEquals(johnSmith.getPassphrase(), kw);
     }
 }

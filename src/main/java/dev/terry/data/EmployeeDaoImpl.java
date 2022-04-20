@@ -30,7 +30,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             ps.setString(1, employee.getEmpId());
             ps.setString(2, employee.getFirstname());
             ps.setString(3, employee.getLastname());
-            ps.setString(4, employee.getKeyword());
+            ps.setString(4, employee.getPassphrase());
 
             ps.execute();
 
@@ -62,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             employee.setEmpId(rs.getString("emp_id"));
             employee.setFirstname(rs.getString("firstname"));
             employee.setLastname(rs.getString("lastname"));
-            employee.setKeyword(rs.getString("keyword"));
+            employee.setPassphrase(rs.getString("passphrase"));
 
             return employee;
         }catch(SQLException e){
@@ -93,7 +93,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
                 employee.setEmpId(rs.getString("emp_id"));
                 employee.setFirstname(rs.getString("firstname"));
                 employee.setLastname(rs.getString("lastname"));
-                employee.setKeyword(rs.getString("keyword"));
+                employee.setPassphrase(rs.getString("passphrase"));
                 employees.add(employee);
             }
         return employees;
@@ -102,14 +102,50 @@ public class EmployeeDaoImpl implements EmployeeDao{
             return null;
         }
     }
-
     @Override
     public Employee updateEmployee(Employee employee){
-        return null;
+        try{
+            // connect to database: "khenan_terry_p1"
+            Connection conn = ConnectUtil.createConnect();
+
+            // SQL insertion into table: "employee"
+            String sql = "update employee set firstname=?, lastname=?, passphrase=?  where emp_id=?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            // string parameters
+            ps.setString(1, employee.getFirstname());
+            ps.setString(2, employee.getLastname());
+            ps.setString(3, employee.getPassphrase());
+            ps.setString(4, employee.getEmpId());
+
+            ps.execute();
+
+            return employee;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public boolean deleteEmployeeById(String emId){
-        return false;
+    public boolean deleteEmployeeById(String empId){
+        try{
+            // connect to database: "khenan_terry_p1"
+            Connection conn = ConnectUtil.createConnect();
+
+            // SQL deletion from table: "employee"
+            String sql = "delete from employee where emp_id=?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            // string parameters
+            ps.setString(1, empId);
+
+            ps.execute();
+
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }
