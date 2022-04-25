@@ -53,9 +53,32 @@ public class WebApp {
         });
 
         /* update */
+        app.put("/employees/{empId}", context -> {
+            try {
+                String empId = context.pathParam("empId");
+                String body = context.body();
 
+                Employee employee = gson.fromJson(body, Employee.class);
+                employee.setEmpId(empId);
+
+                employeeService.updateEmployeeField(employee);
+                context.result("Updated Employee Info.");
+                context.status(200);
+            }catch(ResourceNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
+            }
+        });
         /* delete */
-
+        app.delete("/employees/{empId}",context -> {
+            String empId = context.pathParam("empId");
+            boolean result = employeeService.removeEmployeeById(empId);
+            if(result){
+                context.status(204);
+            }else{
+                context.status(500);
+            }
+        });
         // start
         app.start(7000);
     }

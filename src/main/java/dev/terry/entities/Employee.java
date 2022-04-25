@@ -49,11 +49,11 @@ public class Employee{
 
     @Override
     public String toString() {
-        return "Employee{\n" +
-                "\temp_id=" + this.empId +"\n"+
-                "\tfirstname=" + this.firstname +"\n"+
-                "\tlastname=" + this.lastname +"\n"+
-                "\tpassphrase=" + this.passphrase +"\n"+
+        return "Employee{" +
+                "empId:" + this.empId +","+
+                "firstname:" + this.firstname +","+
+                "lastname:" + this.lastname +","+
+                "passphrase:" + this.passphrase +
                 '}';
     }
 }

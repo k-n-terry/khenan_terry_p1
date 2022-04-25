@@ -26,6 +26,11 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    public Employee updateEmployeeField(Employee employee){
+        return this.employeeDao.updateEmployee(employee);
+    }
+
+    @Override
     public boolean removeEmployeeById(String empId){
         boolean bool = this.employeeDao.deleteEmployeeById(empId);
         return bool;

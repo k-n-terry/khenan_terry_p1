@@ -65,7 +65,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>dev.ranieri.app.App</mainClass>
+                                    <mainClass>dev.terry.api.WebApp</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

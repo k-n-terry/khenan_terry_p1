@@ -10,5 +10,7 @@ public interface EmployeeService{
 
     List<Employee> employeeRegistry();
 
+    Employee updateEmployeeField(Employee employee);
+
     boolean removeEmployeeById(String empId);
 }

@@ -48,7 +48,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Connection conn = ConnectUtil.createConnect();
 
             // SQL selection from table: "employee"
-            String sql = "select * from employee where emp_id = ?;";
+            String sql = "select * from employee where empId = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,empId);
 
@@ -59,7 +59,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             // assign rs-results to fields in employee object
             Employee employee = new Employee();
             // set fields
-            employee.setEmpId(rs.getString("emp_id"));
+            employee.setEmpId(rs.getString("empId"));
             employee.setFirstname(rs.getString("firstname"));
             employee.setLastname(rs.getString("lastname"));
             employee.setPassphrase(rs.getString("passphrase"));
@@ -90,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
                 // assign rs-results to fields in employee object
                 Employee employee = new Employee();
                 // set fields
-                employee.setEmpId(rs.getString("emp_id"));
+                employee.setEmpId(rs.getString("empId"));
                 employee.setFirstname(rs.getString("firstname"));
                 employee.setLastname(rs.getString("lastname"));
                 employee.setPassphrase(rs.getString("passphrase"));
@@ -109,7 +109,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Connection conn = ConnectUtil.createConnect();
 
             // SQL insertion into table: "employee"
-            String sql = "update employee set firstname=?, lastname=?, passphrase=?  where emp_id=?;";
+            String sql = "update employee set firstname=?, lastname=?, passphrase=?  where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // string parameters
@@ -134,7 +134,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Connection conn = ConnectUtil.createConnect();
 
             // SQL deletion from table: "employee"
-            String sql = "delete from employee where emp_id=?;";
+            String sql = "delete from employee where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // string parameters
