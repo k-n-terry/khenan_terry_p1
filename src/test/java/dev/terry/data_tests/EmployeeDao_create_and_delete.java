@@ -10,48 +10,44 @@ import java.util.Random;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDao_create_and_delete{
-    static EmployeeDao employeeDao = new EmployeeDaoImpl();
-    static Employee savedJohnSmithDao = new Employee();
+    private static EmployeeDao employeeDao = new EmployeeDaoImpl();
+    private static Employee savedDeleteMeDao = new Employee();
 
     // theoretical fields; names are generated randomly
-    Random r = new Random();
-    String fn = "Deleterius_"+Integer.toString(r.nextInt(99999)+1);
-    String ln = "Maximus_"+Integer.toString(r.nextInt(99999)+1);
-    String kw = "HiFromIntelliJ";
+    private Random r = new Random();
+    private String firstname = "Deleterius_"+Integer.toString(r.nextInt(999));
+    private String lastname = "Maximus_"+Integer.toString(r.nextInt(999));
+    private String registry = "Listed";
+    private String empId = new UniqueIdMD5().makeUniqueId(firstname,lastname);
 
     @Test
     @Order(1)
     void can_create_employee_row(){
         // Employee obj.
-        Employee johnSmith = new Employee();
-        johnSmith.setFirstname(fn);
-        johnSmith.setLastname(ln);
-        johnSmith.setPassphrase(kw);
+        Employee deleteMe = new Employee();
+        deleteMe.setEmpId(empId);
+        deleteMe.setFirstname(firstname);
+        deleteMe.setLastname(lastname);
+        deleteMe.setRegistry(registry);
 
         // call .createEmployee()
-        Employee johnSmithDao = employeeDao.createEmployee(johnSmith);
+        Employee deleteMeDao = employeeDao.createEmployee(deleteMe);
 
-        // save johnSmithDao
-        EmployeeDao_create_and_delete.savedJohnSmithDao = johnSmithDao;
-
-        // set theoretical ID value
-        UniqueIdMD5 uniqueId = new UniqueIdMD5(johnSmith);
-        johnSmith.setEmpId(uniqueId.makeUniqueId());
-
-        System.out.println(johnSmith.getEmpId());
+        // save for next test
+        EmployeeDao_create_and_delete.savedDeleteMeDao = deleteMeDao;
 
         // check correct obj. creation
-        Assertions.assertEquals(johnSmith.getEmpId(), johnSmithDao.getEmpId());
-        Assertions.assertEquals(johnSmith.getFirstname(), johnSmithDao.getFirstname());
-        Assertions.assertEquals(johnSmith.getLastname(), johnSmithDao.getLastname());
-        Assertions.assertEquals(johnSmith.getPassphrase(), johnSmithDao.getPassphrase());
+        Assertions.assertEquals(deleteMe.getEmpId(), deleteMeDao.getEmpId());
+        Assertions.assertEquals(deleteMe.getFirstname(), deleteMeDao.getFirstname());
+        Assertions.assertEquals(deleteMe.getLastname(), deleteMeDao.getLastname());
+        Assertions.assertEquals(deleteMe.getRegistry(), deleteMeDao.getRegistry());
     }
     @Test
     @Order(2)
-    void can_delete_employee_row_by_id(){
-        System.out.println("Deleted employee{ "+savedJohnSmithDao.getEmpId()+" }");
+    void can_unlist_employee_by_id(){
+        System.out.println("Unlisted EmployeeID{ "+savedDeleteMeDao.getEmpId()+" }");
 
-        boolean bool = employeeDao.deleteEmployeeById(savedJohnSmithDao.getEmpId());
+        boolean bool = employeeDao.unlistEmployeeById(savedDeleteMeDao.getEmpId());
         Assertions.assertTrue(bool);
     }
 }

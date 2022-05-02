@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class EmployeeDao_readAll {
-    static EmployeeDao employeeDao = new EmployeeDaoImpl();
+    private static EmployeeDao employeeDao = new EmployeeDaoImpl();
 
     @Test
     void can_read_employee_row_by_id(){

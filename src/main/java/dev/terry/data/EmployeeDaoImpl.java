@@ -1,10 +1,8 @@
 package dev.terry.data;
 
 import dev.terry.entities.Employee;
-import dev.terry.utilities.ArrayList;
-import dev.terry.utilities.ConnectUtil;
-import dev.terry.utilities.List;
-import dev.terry.utilities.UniqueIdMD5;
+import dev.terry.exceptions.EmployeeIdException;
+import dev.terry.utilities.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EmployeeDaoImpl implements EmployeeDao{
+    // Create
     @Override
     public Employee createEmployee(Employee employee){
         try{
@@ -22,27 +21,24 @@ public class EmployeeDaoImpl implements EmployeeDao{
             String sql = "insert into employee values(?,?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            // unique empId for employee
-            UniqueIdMD5 uniqueId = new UniqueIdMD5(employee);
-            employee.setEmpId(uniqueId.makeUniqueId());
-
             // string parameters
             ps.setString(1, employee.getEmpId());
             ps.setString(2, employee.getFirstname());
             ps.setString(3, employee.getLastname());
-            ps.setString(4, employee.getPassphrase());
+            ps.setString(4, employee.getRegistry());
 
             ps.execute();
 
             return employee;
         }catch(SQLException e){
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
-
+    // Read
     @Override
-    public Employee readEmployeeById(String empId){
+    public Employee readEmployeeById(String empId) throws EmployeeIdException{
         try{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
@@ -62,15 +58,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
             employee.setEmpId(rs.getString("empId"));
             employee.setFirstname(rs.getString("firstname"));
             employee.setLastname(rs.getString("lastname"));
-            employee.setPassphrase(rs.getString("passphrase"));
+            employee.setRegistry(rs.getString("registry"));
 
             return employee;
         }catch(SQLException e){
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
-
     @Override
     public List<Employee> readAllEmployees(){
         try{
@@ -93,15 +89,18 @@ public class EmployeeDaoImpl implements EmployeeDao{
                 employee.setEmpId(rs.getString("empId"));
                 employee.setFirstname(rs.getString("firstname"));
                 employee.setLastname(rs.getString("lastname"));
-                employee.setPassphrase(rs.getString("passphrase"));
+                employee.setRegistry(rs.getString("registry"));
                 employees.add(employee);
             }
         return employees;
         }catch(SQLException e){
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
+
+    // Update
     @Override
     public Employee updateEmployee(Employee employee){
         try{
@@ -109,42 +108,44 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Connection conn = ConnectUtil.createConnect();
 
             // SQL insertion into table: "employee"
-            String sql = "update employee set firstname=?, lastname=?, passphrase=?  where empId=?;";
+            String sql = "update employee set firstname=?, lastname=? where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // string parameters
             ps.setString(1, employee.getFirstname());
             ps.setString(2, employee.getLastname());
-            ps.setString(3, employee.getPassphrase());
-            ps.setString(4, employee.getEmpId());
+            ps.setString(3, employee.getEmpId());
 
             ps.execute();
 
             return employee;
         }catch(SQLException e){
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
-
+    // Delete (Update as unlisted)
     @Override
-    public boolean deleteEmployeeById(String empId){
+    public boolean unlistEmployeeById(String empId){
         try{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL deletion from table: "employee"
-            String sql = "delete from employee where empId=?;";
+            // SQL insertion into table: "employee"
+            String sql = "update employee set registry=? where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // string parameters
-            ps.setString(1, empId);
+            ps.setString(1, "Unlisted");
+            ps.setString(2, empId);
 
             ps.execute();
 
             return true;
         }catch(SQLException e){
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return false;
         }
     }

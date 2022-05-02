@@ -1,33 +1,33 @@
 package dev.terry.data_tests;
 
-import dev.terry.data.EmployeeDao;
-import dev.terry.data.EmployeeDaoImpl;
-import dev.terry.entities.Employee;
+import dev.terry.data.ExpenseDao;
+import dev.terry.data.ExpenseDaoImpl;
+import dev.terry.entities.Expense;
 import org.junit.jupiter.api.*;
 
 import java.util.Random;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EmployeeDao_update_and_read {
-    private static EmployeeDao employeeDao = new EmployeeDaoImpl();
-    private static Employee savedSomeOneDao = new Employee();
+public class ExpenseDao_update_and_read {
+    static EmployeeDao employeeDao = new EmployeeDaoImpl();
+    static Employee savedSomeOneDao = new Employee();
 
     // constant emp_id, but other fields change randomly
     Random r = new Random();
-    String empId = "CDC996828540D64AD3E008E081ABF988";
-    String firstname = "Update_"+Integer.toString(r.nextInt(999));
-    String lastname = "From IntelliJ_"+Integer.toString(r.nextInt(999));
-    String registry = "Listed";
+    String ei = "CDC996828540D64AD3E008E081ABF988";
+    String fn = "Update_"+Integer.toString(r.nextInt(999));
+    String ln = "From IntelliJ_"+Integer.toString(r.nextInt(999));
+    String ry = "Listed";
 
     @Test
     @Order(1)
     void can_update_employee_row(){
         // Employee obj.
         Employee someOne = new Employee();
-        someOne.setEmpId(empId);
-        someOne.setFirstname(firstname);
-        someOne.setLastname(lastname);
-        someOne.setRegistry(registry);
+        someOne.setEmpId(ei);
+        someOne.setFirstname(fn);
+        someOne.setLastname(ln);
+        someOne.setRegistry(ry);
 
         // call .updateEmployee method
         Employee someOneDao = employeeDao.updateEmployee(someOne);

@@ -11,34 +11,25 @@ import dev.terry.utilities.UniqueIdMD5;
  public class UniqueIdMD5_makeUniqueId{
     @Test
     void can_make_unique_id(){
-        Employee khenan = new Employee();
-        Employee brandon = new Employee();
+        /* set fields with different but similar values */
+        // Employee 01:
+        String fname01 = "Khenan";
+        String lname01 = "Terry";
+        String id01 = new UniqueIdMD5().makeUniqueId(fname01,lname01);
 
-        // set needed parameters
-        // firstname
-        khenan.setFirstname("Khenan");
-        brandon.setFirstname("Brandon");
-        // lastname
-        khenan.setLastname("Terry");
-        brandon.setLastname("Terry");
-        // password
-        khenan.setPassphrase("abc123");
-        brandon.setPassphrase("abc123");
+        // Employee 02:
+        String fname02 = "Kenan";
+        String lname02 = "Terry";
+        String id02 = new UniqueIdMD5().makeUniqueId(fname02,lname02);
 
-        UniqueIdMD5 uniqueId_01 = new UniqueIdMD5(khenan);
-        UniqueIdMD5 uniqueId_02 = new UniqueIdMD5(brandon);
-
-        khenan.setEmpId(uniqueId_01.makeUniqueId());
-        brandon.setEmpId(uniqueId_02.makeUniqueId());
-
-        // check theoretical equality
-        String theoretical_01 = "0aa3105b5d68cddc6c1062755b85999f";
-        Assertions.assertEquals(khenan.getEmpId(), theoretical_01.toUpperCase());
-
-        String theoretical_02 = "1332c0c759cd30f95c1ee92d1dfd5c7e";
-        Assertions.assertEquals(brandon.getEmpId(), theoretical_02.toUpperCase());
+        // Employee 03:
+        String fname03 = "Keenan";
+        String lname03 = "Terry";
+        String id03 = new UniqueIdMD5().makeUniqueId(fname03,lname03);
 
         // check uniquity
-        Assertions.assertNotEquals(khenan.getEmpId(), brandon.getEmpId());
+        Assertions.assertNotEquals(id01, id02);
+        Assertions.assertNotEquals(id01, id03);
+        Assertions.assertNotEquals(id02, id03);
     }
  }

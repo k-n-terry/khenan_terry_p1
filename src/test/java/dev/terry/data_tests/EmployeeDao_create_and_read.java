@@ -10,49 +10,45 @@ import java.util.Random;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDao_create_and_read {
-    static EmployeeDao employeeDao = new EmployeeDaoImpl();
-    static Employee savedJohnSmithDao = new Employee();
+    private static EmployeeDao employeeDao = new EmployeeDaoImpl();
+    private static Employee savedReadMeDao = new Employee();
 
     // theoretical fields; names are generated randomly
-    Random r = new Random();
-    String fn = "John_"+Integer.toString(r.nextInt(99999)+1);
-    String ln = "Smith_"+Integer.toString(r.nextInt(99999)+1);
-    String kw = "HiFromIntelliJ";
+    private Random r = new Random();
+    private String firstname = "Intelligent_"+Integer.toString(r.nextInt(999));
+    private String lastname = "Jay_"+Integer.toString(r.nextInt(999));
+    private String registry = "Listed";
+    private String empId = new UniqueIdMD5().makeUniqueId(firstname,lastname);
 
     @Test
     @Order(1)
     void can_create_employee_row(){
         // Employee obj.
-        Employee johnSmith = new Employee();
-        johnSmith.setFirstname(fn);
-        johnSmith.setLastname(ln);
-        johnSmith.setPassphrase(kw);
+        Employee readMe = new Employee();
+        readMe.setEmpId(empId);
+        readMe.setFirstname(firstname);
+        readMe.setLastname(lastname);
+        readMe.setRegistry(registry);
 
         // call .createEmployee()
-        Employee johnSmithDao = employeeDao.createEmployee(johnSmith);
+        Employee readMeDao = employeeDao.createEmployee(readMe);
 
-        // save johnSmithDao
-        EmployeeDao_create_and_read.savedJohnSmithDao = johnSmithDao;
-
-        // set theoretical ID value
-        UniqueIdMD5 uniqueId = new UniqueIdMD5(johnSmith);
-        johnSmith.setEmpId(uniqueId.makeUniqueId());
-
-        System.out.println(johnSmith.getEmpId());
+        // save for next test
+        EmployeeDao_create_and_read.savedReadMeDao = readMeDao;
 
         // check correct obj. creation
-        Assertions.assertEquals(johnSmith.getEmpId(), johnSmithDao.getEmpId());
-        Assertions.assertEquals(johnSmith.getFirstname(), johnSmithDao.getFirstname());
-        Assertions.assertEquals(johnSmith.getLastname(), johnSmithDao.getLastname());
-        Assertions.assertEquals(johnSmith.getPassphrase(), johnSmithDao.getPassphrase());
+        Assertions.assertEquals(readMe.getEmpId(), readMeDao.getEmpId());
+        Assertions.assertEquals(readMe.getFirstname(), readMeDao.getFirstname());
+        Assertions.assertEquals(readMe.getLastname(), readMeDao.getLastname());
+        Assertions.assertEquals(readMe.getRegistry(), readMeDao.getRegistry());
     }
     @Test
     @Order(2)
     void can_read_employee_row_by_id(){
         // read the id from readEmployee obj.
-        Employee readEmployee = employeeDao.readEmployeeById(savedJohnSmithDao.getEmpId());
+        Employee readEmployee = employeeDao.readEmployeeById(savedReadMeDao.getEmpId());
         System.out.println(readEmployee.toString());
 
-        Assertions.assertEquals(savedJohnSmithDao.getEmpId(), readEmployee.getEmpId());
+        Assertions.assertEquals(savedReadMeDao.getEmpId(), readEmployee.getEmpId());
     }
 }

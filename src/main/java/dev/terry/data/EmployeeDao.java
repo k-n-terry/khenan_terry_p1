@@ -3,7 +3,7 @@ package dev.terry.data;
 import dev.terry.entities.Employee;
 import dev.terry.utilities.List;
 
-public interface EmployeeDao {
+public interface EmployeeDao{
     // create
     Employee createEmployee(Employee employee);
     // read
@@ -12,5 +12,5 @@ public interface EmployeeDao {
     // update
     Employee updateEmployee(Employee employee);
     // delete
-    boolean deleteEmployeeById(String empId);
+    boolean unlistEmployeeById(String empId);
 }
