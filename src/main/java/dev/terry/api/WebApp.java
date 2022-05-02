@@ -69,7 +69,9 @@ public class WebApp{
                 context.result(employeesJSON);
             }catch(EmployeeIdException e){
                 context.status(404);
-                context.result("No employees found");
+                String message = "No employees found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         /* PUT EMPLOYEES */
@@ -80,7 +82,9 @@ public class WebApp{
                 String employeeJSON = gson.toJson(employeeService.getEmployeeById(empId));
                 if(employeeJSON.equals("null")){
                     context.status(404);
-                    context.result("Employee ID{ "+empId+" } - not found");
+                    String message = "Employee ID{ "+empId+" } - not found";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     String body = context.body();
 
@@ -89,7 +93,9 @@ public class WebApp{
 
                     employeeService.updateEmployeeField(employee);
 
-                    context.result("Updated Info. for EmployeeID{"+empId+"}");
+                    String message = "Updated Info. for EmployeeID{"+empId+"}";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                     context.status(200);
                 }
             }catch(ResourceNotFound e){
@@ -119,7 +125,9 @@ public class WebApp{
             try{
                 if(check.equals(null)){
                     context.status(404);
-                    context.result("EmployeeID{"+expense.getEmpId()+"} was not found");
+                    String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     if(check.getRegistry().equals("Listed")){
                         expenseService.registerExpense(expense);
@@ -129,13 +137,17 @@ public class WebApp{
                         context.result(expenseJSON);
                     }else if(check.getRegistry().equals("Unlisted")){
                         context.status(403);
-                        context.result("EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time.");
+                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time.";
+                        context.result(message);
+                        Logger.log(message, LogLevel.INFO);
                     }
                 }
             }catch(NullPointerException e){
                 e.printStackTrace();
                 context.status(404);
-                context.result("EmployeeID{"+expense.getEmpId()+"} was not found");
+                String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         // nested REST
@@ -154,7 +166,9 @@ public class WebApp{
                 context.result(expenseJSON);
             }else{
                 context.status(404);
-                context.result("EmployeeID{"+expense.getEmpId()+"} was found, but expenses may not be submitted at this time.");
+                String message = "EmployeeID{"+expense.getEmpId()+"} was found, but expenses may not be submitted at this time.";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         /* GET EXPENSES */
@@ -166,13 +180,17 @@ public class WebApp{
                 String expenseJSON = gson.toJson(expenseService.getExpenseById(expenseId));
                 if(expenseJSON.equals("null")){
                     context.status(404);
-                    context.result("Expense ID{ "+expenseId+" } - not found");
+                    String message = "Expense ID{ "+expenseId+" } - not found";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     context.result(expenseJSON);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                context.result("Expense ID{ "+expenseId+" } - not found");
+                String message = "Expense ID{ "+expenseId+" } - not found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         // all
@@ -184,7 +202,9 @@ public class WebApp{
                 context.result(expensesJSON);
             }catch(ResourceNotFound e){
                 context.status(404);
-                context.result("No expenses found");
+                String message = "No expenses found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         // nested REST
@@ -195,13 +215,17 @@ public class WebApp{
                 String expenseJSON = gson.toJson(expenseService.expenseRegistryByEmpId(empId));
                 if(expenseJSON.equals("null")){
                     context.status(404);
-                    context.result("Expense ID{ "+empId+" } - not found");
+                    String message = "Expense ID{ "+empId+" } - not found";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     context.result(expenseJSON);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                context.result("Expense ID{ "+empId+" } - not found");
+                String message = "Expense ID{ "+empId+" } - not found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
         /* PUT EXPENSES */
@@ -217,10 +241,14 @@ public class WebApp{
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(403);
-                    context.result("Expense ID{ "+expenseId+" } - may not be edited.");
+                    String message = "Expense ID{ "+expenseId+" } - may not be edited.";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.updateExpenseFields(expense);
-                    context.result("Updated Expense Info.");
+                    String message = "Updated Expense Info.";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                     context.status(200);
                 }
             }catch(ResourceNotFound e){
@@ -248,7 +276,9 @@ public class WebApp{
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(404);
-                    context.result("Expense ID{ "+expenseId+" } - may not be edited.");
+                    String message = "Expense ID{ "+expenseId+" } - may not be edited.";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.patchExpenseStatus(expense);
                     context.result("Updated Expense Info.");
@@ -268,15 +298,21 @@ public class WebApp{
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(403);
-                    context.result("Expense ID{ "+expenseId+" } - is non-pending and may not be deleted.");
+                    String message = "Expense ID{ "+expenseId+" } - is non-pending and may not be deleted.";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.removeExpenseById(expenseId);
-                    context.result("Deleted Expense ID{"+expenseId+"}");
+                    String message = "Deleted Expense ID{"+expenseId+"}";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
                     context.status(200);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                context.result("Expense ID{ "+expenseId+" } - not found");
+                String message = "Expense ID{ "+expenseId+" } - not found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
             }
         });
 
