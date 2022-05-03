@@ -10,7 +10,7 @@ ENV KHENAN_TERRY_P1="jdbc:postgresql://revature-kterry-db.cwyqcu7gmbtm.us-east-1
 COPY . /workspace
 
 # which port does the app. run on
-EXPOSE 7000
+EXPOSE 5000
 
 # specify directory in the env, where you want to work.
 WORKDIR /workspace
