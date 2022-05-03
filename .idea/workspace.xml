@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dece3d7-a758-472f-ad70-e42b71a9935b" name="Changes" comment="Fixed Logger not getting Exception Messages.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +43,7 @@
   <component name="RunManager" selected="Application.WebApp">
     <configuration name="WebApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dev.terry.api.WebApp" />
-      <module name="khenan_terry_p1" />
+      <module name="khenan_terry_p1_REST_API" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="dev.terry.api.*" />
@@ -145,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651606751520</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed Logger not getting Exception Messages.">
+      <created>1651606941236</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651606941236</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
