@@ -34,8 +34,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
             }else{
                 throw new NegativeExpenseException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e){
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -67,7 +67,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             return expense;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -100,7 +100,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             }
         return expenses;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -134,7 +134,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             }
         return expenses;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -160,7 +160,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             return expense;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -183,7 +183,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             return expense;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -205,7 +205,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             return true;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return false;
         }

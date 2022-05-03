@@ -31,7 +31,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return employee;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -62,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return employee;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -94,7 +94,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             }
         return employees;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -120,7 +120,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return employee;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
@@ -144,7 +144,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return true;
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("SQLException occured!!!");
             Logger.log(e.getMessage(), LogLevel.ERROR);
             return false;
         }

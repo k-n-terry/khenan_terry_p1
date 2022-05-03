@@ -10,7 +10,8 @@ public class ConnectUtil{
             Connection conn = DriverManager.getConnection(System.getenv("KHENAN_TERRY_P1"));
             return conn;
         }catch(SQLException e){
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
+            System.out.println("Connection failed!!!");
             return null;
         }
     }

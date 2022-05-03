@@ -25,7 +25,7 @@ public class UniqueIdMD5{
             String uniqueId = DatatypeConverter.printHexBinary(messageDigestBytes).toUpperCase();
             return uniqueId;
         }catch(NoSuchAlgorithmException e){
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             String uniqueId = null;
             return uniqueId;
         }
@@ -45,7 +45,7 @@ public class UniqueIdMD5{
             String uniqueId = DatatypeConverter.printHexBinary(messageDigestBytes).toUpperCase();
             return uniqueId;
         }catch(NoSuchAlgorithmException e){
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             String uniqueId = null;
             return uniqueId;
         }

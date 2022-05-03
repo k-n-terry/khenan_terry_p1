@@ -57,7 +57,10 @@ public class WebApp{
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                context.result("Employee ID{ "+empId+" } - not found");
+                String message = "Employee ID{ "+empId+" } - not found";
+                context.result(message);
+                Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         // all
@@ -72,6 +75,7 @@ public class WebApp{
                 String message = "No employees found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* PUT EMPLOYEES */
@@ -101,6 +105,7 @@ public class WebApp{
             }catch(ResourceNotFound e){
                 context.status(404);
                 context.result(e.getMessage());
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* DELETE EMPLOYEES */
@@ -148,6 +153,7 @@ public class WebApp{
                 String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         // nested REST
@@ -191,6 +197,7 @@ public class WebApp{
                 String message = "Expense ID{ "+expenseId+" } - not found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         // all
@@ -205,6 +212,7 @@ public class WebApp{
                 String message = "No expenses found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         // nested REST
@@ -226,6 +234,7 @@ public class WebApp{
                 String message = "Expense ID{ "+empId+" } - not found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* PUT EXPENSES */
@@ -254,6 +263,7 @@ public class WebApp{
             }catch(ResourceNotFound e){
                 context.status(404);
                 context.result(e.getMessage());
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* PATCH EXPENSES */
@@ -287,6 +297,7 @@ public class WebApp{
             }catch(EmployeeIdException e){
                 context.status(404);
                 context.result(e.getMessage());
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* DELETE EXPENSES */
@@ -313,6 +324,7 @@ public class WebApp{
                 String message = "Expense ID{ "+expenseId+" } - not found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
 
