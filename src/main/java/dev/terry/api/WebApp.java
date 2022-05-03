@@ -28,6 +28,11 @@ public class WebApp{
     public static void main(String[] args){
         Javalin app = Javalin.create();
 
+        /* Welcome */
+        app.get("/", context -> {
+            context.result("WELCOME to Khenan Terry's Project 1: REST API");
+        });
+
         /* POST EMPLOYEES */
         app.post("/employees", context -> {
             System.out.println("Called POST employee route!!");
