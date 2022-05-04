@@ -25,6 +25,12 @@
 - Column 4 is the expense amount (numeric to 2 decimal places).
 - Column 5 is the approval status of the expense (string): Approved, Denied, Pending.
 
+## Routes
+
+### Delete
+- To comply with the expectations for P1 expense entries are unable to be deleted.
+- Therewith employees may also not be deleted, as the foreign key constraints prevent this. Instead of truly "deleting" am employee row, the delete-route modifies the "registry" field for an employee to "Unlisted". If the employee is unlisted, then expenses may not be posted for the corresponding employee ID.
+
 ## Pattern
 
 ### Main Packages
