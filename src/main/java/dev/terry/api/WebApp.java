@@ -68,11 +68,13 @@ public class WebApp{
         });
         // all
         app.get("/employees", context -> {
+            String registry = context.queryParam("registry");
             System.out.println("Called GET all employee route!!");
             try{
                 List<Employee> employees = employeeService.employeeRegistry();
                 String employeesJSON = gson.toJson(employees);
                 context.result(employeesJSON);
+                Logger.log("Called GET all employee route!!",LogLevel.INFO);
             }catch(EmployeeIdException e){
                 context.status(404);
                 String message = "No employees found";

@@ -1,5 +1,8 @@
 # Khenan Terry Project 1:
 
+## Elastic Beanstalk Link
+- [Khenan Terry's deployed P1](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/
+
 ## Tables
 
 ### ERD Diagram
@@ -21,3 +24,21 @@
 - Column 3 is a label for the expense (string).
 - Column 4 is the expense amount (numeric to 2 decimal places).
 - Column 5 is the approval status of the expense (string): Approved, Denied, Pending.
+
+## Pattern
+
+### Main Packages
+
+![Main Packages](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/notes/program_structure.png)
+
+### Logger
+
+![Logger](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/notes/logger.png)
+
+### IntelliJ Tests
+
+![IntelliJ Tests](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/notes/intelliJ_tests.png)
+
+### Postman Tests
+
+![Postman Tests](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/notes/postman_tests.png)
