@@ -222,7 +222,7 @@ public class WebApp{
             System.out.println("Called GET all expenses route!!");
             String empId = context.pathParam("empId");
             try{
-                List<Expense> expenses = expenseService.expenseRegistry();
+                List<Expense> expenses = expenseService.expenseRegistryByEmpId(empId);
                 String expensesJSON = gson.toJson(expenses);
                 context.result(expensesJSON);
                 Logger.log("Expenses request for EmployeeID{ "+empId+" }",LogLevel.INFO);
