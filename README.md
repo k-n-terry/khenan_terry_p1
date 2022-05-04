@@ -1,7 +1,7 @@
 # Khenan Terry Project 1:
 
 ## Elastic Beanstalk Link
-- [Khenan Terry's deployed P1](https://raw.githubusercontent.com/k-n-terry/khenan_terry_p1/master/
+- [Khenan Terry's deployed P1](http://khenanterryp1restapi-env-1.eba-2ip9ja89.us-east-1.elasticbeanstalk.com/)
 
 ## Tables
 
