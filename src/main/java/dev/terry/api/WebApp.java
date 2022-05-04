@@ -76,7 +76,7 @@ public class WebApp{
                 Logger.log("Called GET all employee route!!",LogLevel.INFO);
             }catch(EmployeeIdException e){
                 context.status(404);
-                String message = "No employees found";
+                String message = "No employees found!!!";
                 context.result(message);
                 Logger.log(message, e.getMessage(), LogLevel.ERROR);
             }
@@ -88,7 +88,7 @@ public class WebApp{
                 String employeeJSON = gson.toJson(employeeService.getEmployeeById(empId));
                 if(employeeJSON.equals("null")){
                     context.status(404);
-                    String message = "Employee ID{ "+empId+" } - not found";
+                    String message = "Employee ID{ "+empId+" } - not found!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
@@ -99,7 +99,7 @@ public class WebApp{
 
                     employeeService.updateEmployeeField(employee);
 
-                    String message = "Updated Info. for EmployeeID{"+empId+"}";
+                    String message = "Updated Info. for EmployeeID{"+empId+"}!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                     context.status(200);
@@ -125,14 +125,13 @@ public class WebApp{
         /* POST EXPENSES */
         // EXPENSE
         app.post("/expenses", context -> {
-            System.out.println("Called POST expense route!!");
             String body = context.body();
             Expense expense = gson.fromJson(body, Expense.class);
             Employee check = employeeService.getEmployeeById(expense.getEmpId());
             try{
                 if(check.toString().equals(null)){
                     context.status(404);
-                    String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
+                    String message = "EmployeeID{"+expense.getEmpId()+"} was not found!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
@@ -142,9 +141,10 @@ public class WebApp{
                         context.status(201);
                         String expenseJSON = gson.toJson(expense);
                         context.result(expenseJSON);
+                        Logger.log("Called POST expense route!!",LogLevel.INFO);
                     }else if(check.getRegistry().equals("Unlisted")){
                         context.status(403);
-                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time.";
+                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time!!!";
                         context.result(message);
                         Logger.log(message, LogLevel.INFO);
                     }
@@ -152,7 +152,7 @@ public class WebApp{
             }catch(NullPointerException e){
                 e.printStackTrace();
                 context.status(404);
-                String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
+                String message = "EmployeeID{"+expense.getEmpId()+"} was not found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
@@ -168,7 +168,7 @@ public class WebApp{
             try{
                 if(check.toString().equals(null)){
                     context.status(404);
-                    String message = "EmployeeID{"+empId+"} was not found";
+                    String message = "EmployeeID{"+empId+"} was not found!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
@@ -178,10 +178,10 @@ public class WebApp{
                         context.status(201);
                         String expenseJSON = gson.toJson(expense);
                         context.result(expenseJSON);
-                        Logger.log("Expense created for EmployeeID{"+empId+"}", LogLevel.INFO);
+                        Logger.log("Expense created for EmployeeID{"+empId+"}!!!", LogLevel.INFO);
                     }else if(check.getRegistry().equals("Unlisted")){
                         context.status(403);
-                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time.";
+                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time!!!";
                         context.result(message);
                         Logger.log(message, LogLevel.INFO);
                     }
@@ -189,7 +189,7 @@ public class WebApp{
             }catch(NullPointerException e){
                 e.printStackTrace();
                 context.status(404);
-                String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
+                String message = "EmployeeID{"+expense.getEmpId()+"} was not found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
@@ -204,16 +204,16 @@ public class WebApp{
                 String expenseJSON = gson.toJson(expenseService.getExpenseById(expenseId));
                 if(expenseJSON.equals("null")){
                     context.status(404);
-                    String message = "Expense ID{ "+expenseId+" } - not found";
+                    String message = "Expense ID{ "+expenseId+" } - not found!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
                     context.result(expenseJSON);
-                    Logger.log("Called GET expense by id route!!",LogLevel.INFO);
+                    Logger.log("Called GET expense by id route!!!",LogLevel.INFO);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                String message = "Expense ID{ "+expenseId+" } - not found";
+                String message = "Expense ID{ "+expenseId+" } - not found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
@@ -227,16 +227,16 @@ public class WebApp{
                     List<Expense> expenses = expenseService.expenseRegistry();
                     String expensesJSON = gson.toJson(expenses);
                     context.result(expensesJSON);
-                    Logger.log("Called GET all expenses route!!", LogLevel.INFO);
+                    Logger.log("Called GET all expenses route!!!", LogLevel.INFO);
                 }else{
                     List<Expense> expenses = expenseService.expenseRegistryByStatus(status);
                     String expensesJSON = gson.toJson(expenses);
                     context.result(expensesJSON);
-                    Logger.log("Called GET all expenses route!!", LogLevel.INFO);
+                    Logger.log("Called GET all expenses route!!!", LogLevel.INFO);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                String message = "No expenses found";
+                String message = "No expenses found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
@@ -244,16 +244,15 @@ public class WebApp{
         });
         // nested REST
         app.get("/employees/{empId}/expenses", context -> {
-            System.out.println("Called GET all expenses route!!");
             String empId = context.pathParam("empId");
             try{
                 List<Expense> expenses = expenseService.expenseRegistryByEmpId(empId);
                 String expensesJSON = gson.toJson(expenses);
                 context.result(expensesJSON);
-                Logger.log("Expenses request for EmployeeID{ "+empId+" }",LogLevel.INFO);
+                Logger.log("Expenses request for EmployeeID{ "+empId+" }!!!",LogLevel.INFO);
             }catch(ResourceNotFound e){
                 context.status(404);
-                String message = "No expenses found";
+                String message = "No expenses found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
@@ -261,7 +260,6 @@ public class WebApp{
         });
         /* PUT EXPENSES */
         app.put("/expenses/{expenseId}", context -> {
-            System.out.println("Called PUT expense route!!");
             try {
                 int expenseId = Integer.parseInt(context.pathParam("expenseId"));
                 String body = context.body();
@@ -272,12 +270,12 @@ public class WebApp{
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(403);
-                    String message = "Expense ID{ "+expenseId+" } - may not be edited.";
+                    String message = "Expense ID{ "+expenseId+" } - may not be edited!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.updateExpenseFields(expense);
-                    String message = "Updated Expense Info.";
+                    String message = "Updated Expense Info!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                     context.status(200);
@@ -290,7 +288,7 @@ public class WebApp{
         });
         /* PATCH EXPENSES */
         app.patch("/expenses/{expenseId}/{statusImp}", context -> {
-            System.out.println("Called PATCH employee route!!");
+            System.out.println();
             String status;
             try {
                 int expenseId = Integer.parseInt(context.pathParam("expenseId"));
@@ -308,13 +306,14 @@ public class WebApp{
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(404);
-                    String message = "Expense ID{ "+expenseId+" } - may not be edited.";
+                    String message = "Expense ID{ "+expenseId+" } - may not be edited!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.patchExpenseStatus(expense);
-                    context.result("Updated Expense Info.");
+                    context.result("Updated Expense Info!!!");
                     context.status(200);
+                    Logger.log("Called PATCH employee route!!", LogLevel.INFO);
                 }
             }catch(EmployeeIdException e){
                 context.status(404);
@@ -324,26 +323,26 @@ public class WebApp{
         });
         /* DELETE EXPENSES */
         app.delete("/expenses/{expenseId}", context -> {
-            System.out.println("Called DELETE expense route!!");
             int expenseId = Integer.parseInt(context.pathParam("expenseId"));
             try{
                 String expenseJSON = gson.toJson(expenseService.getExpenseById(expenseId));
                 Expense check = expenseService.getExpenseById(expenseId);
                 if(!Objects.equals(check.getStatus(), "Pending")){
                     context.status(403);
-                    String message = "Expense ID{ "+expenseId+" } - is non-pending and may not be deleted.";
+                    String message = "Expense ID{ "+expenseId+" } - is non-pending and may not be deleted!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
                     expenseService.removeExpenseById(expenseId);
-                    String message = "Deleted Expense ID{"+expenseId+"}";
+                    String message = "Deleted Expense ID{"+expenseId+"}!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                     context.status(200);
+                    Logger.log("Called DELETE expense route!!",LogLevel.INFO);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                String message = "Expense ID{ "+expenseId+" } - not found";
+                String message = "Expense ID{ "+expenseId+" } - not found!!!";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
                 Logger.log(e.getMessage(), LogLevel.ERROR);
