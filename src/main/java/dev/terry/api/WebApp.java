@@ -16,6 +16,7 @@ import dev.terry.utilities.LogLevel;
 import dev.terry.utilities.Logger;
 import dev.terry.utilities.UniqueIdMD5;
 import io.javalin.Javalin;
+import org.eclipse.jetty.util.log.Log;
 
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class WebApp{
 
         /* Welcome */
         app.get("/", context -> {
-            context.result("WELCOME to Khenan Terry's Project 1: REST API");
+            context.result("WELCOME to Khenan Terry's Project 1: REST API!!!");
         });
 
         /* POST EMPLOYEES */
@@ -43,7 +44,7 @@ public class WebApp{
             context.status(201);
             String employeeJSON = gson.toJson(employee);
             context.result(employeeJSON);
-            Logger.log("Registered EmployeeID{ "+employee.getEmpId()+" }", LogLevel.INFO);
+            Logger.log("Registered EmployeeID{ "+employee.getEmpId()+" }!!!", LogLevel.INFO);
         });
         /* GET EMPLOYEES */
         // by id
@@ -53,7 +54,7 @@ public class WebApp{
                 String employeeJSON = gson.toJson(employeeService.getEmployeeById(empId));
                 if(employeeJSON.equals("null")){
                     context.status(404);
-                    String message = "EmployeeID{ "+empId+" } - not found";
+                    String message = "EmployeeID{ "+empId+" } - not found!!!";
                     context.result(message);
                     Logger.log(message, LogLevel.INFO);
                 }else{
@@ -61,7 +62,7 @@ public class WebApp{
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
-                String message = "Employee ID{ "+empId+" } - not found";
+                String message = "Employee ID{ "+empId+" } - not found!!!";
                 context.result(message);
                 Logger.log(message, e.getMessage(), LogLevel.ERROR);
             }
@@ -69,7 +70,6 @@ public class WebApp{
         // all
         app.get("/employees", context -> {
             String registry = context.queryParam("registry");
-            System.out.println("Called GET all employee route!!");
             try{
                 List<Employee> employees = employeeService.employeeRegistry();
                 String employeesJSON = gson.toJson(employees);
@@ -84,7 +84,6 @@ public class WebApp{
         });
         /* PUT EMPLOYEES */
         app.put("/employees/{empId}", context -> {
-            System.out.println("Called PUT employee route!!");
             String empId = context.pathParam("empId");
             try{
                 String employeeJSON = gson.toJson(employeeService.getEmployeeById(empId));
@@ -118,7 +117,7 @@ public class WebApp{
             String empId = context.pathParam("empId");
             boolean result = employeeService.deactivateEmployeeById(empId);
             if(result){
-                context.status(204);
+                context.status(200);
             }else{
                 context.status(404);
             }
@@ -200,7 +199,8 @@ public class WebApp{
         /* GET EXPENSES */
         // by id
         app.get("/expenses/{expenseId}", context -> {
-            System.out.println("Called GET expense by id route!!");
+            String status = context.queryParam("status");
+            System.out.println();
             int expenseId = Integer.parseInt(context.pathParam("expenseId"));
             try{
                 String expenseJSON = gson.toJson(expenseService.getExpenseById(expenseId));
@@ -211,6 +211,7 @@ public class WebApp{
                     Logger.log(message, LogLevel.INFO);
                 }else{
                     context.result(expenseJSON);
+                    Logger.log("Called GET expense by id route!!",LogLevel.INFO);
                 }
             }catch(ResourceNotFound e){
                 context.status(404);
