@@ -78,7 +78,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL selection from table: "employee"
+            // SQL selection from table: "expense"
             String sql = "select * from expense;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -111,7 +111,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL selection from table: "employee"
+            // SQL selection from table: "expense"
             String sql = "select * from expense where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,empId);
@@ -122,7 +122,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             // while the result-set has a new line:
             while(rs.next()){
-                // assign rs-results to fields in employee object
+                // assign rs-results to fields in expense object
                 Expense expense = new Expense();
                 // set fields
                 expense.setExpenseId(rs.getInt("expenseId"));
@@ -145,7 +145,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL selection from table: "employee"
+            // SQL selection from table: "expense"
             String sql = "select * from expense where status=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,status);
@@ -156,7 +156,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             // while the result-set has a new line:
             while(rs.next()){
-                // assign rs-results to fields in employee object
+                // assign rs-results to fields in expense object
                 Expense expense = new Expense();
                 // set fields
                 expense.setExpenseId(rs.getInt("expenseId"));
@@ -180,7 +180,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL insertion into table: "employee"
+            // SQL insertion into table: "expense"
             String sql = "update expense set expenseLabel=?, expenseAmount=?, status=? where expenseId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -205,7 +205,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             // connect to database: "khenan_terry_p1"
             Connection conn = ConnectUtil.createConnect();
 
-            // SQL insertion into table: "employee"
+            // SQL insertion into table: "expense"
             String sql = "update expense set status=? where expenseId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
