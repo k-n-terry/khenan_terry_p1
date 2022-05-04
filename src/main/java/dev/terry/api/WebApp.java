@@ -160,23 +160,39 @@ public class WebApp{
         });
         // nested REST
         app.post("/employees/{empId}/expenses", context -> {
-            System.out.println("Called POST employee expenses route!!");
             String empId = context.pathParam("empId");
             String body = context.body();
             Expense expense = gson.fromJson(body, Expense.class);
             expense.setEmpId(empId);
-            Employee check = employeeService.getEmployeeById(expense.getEmpId());
-            if(check.getRegistry()=="Listed"){
-                expenseService.registerExpense(expense);
+            Employee check = employeeService.getEmployeeById(empId);
+            try{
+                if(check.toString().equals(null)){
+                    context.status(404);
+                    String message = "EmployeeID{"+empId+"} was not found";
+                    context.result(message);
+                    Logger.log(message, LogLevel.INFO);
+                }else{
+                    if(check.getRegistry().equals("Listed")){
+                        expenseService.registerExpense(expense);
 
-                context.status(201);
-                String expenseJSON = gson.toJson(expense);
-                context.result(expenseJSON);
-            }else{
+                        context.status(201);
+                        String expenseJSON = gson.toJson(expense);
+                        context.result(expenseJSON);
+                        Logger.log("Expense created for EmployeeID{"+empId+"}", LogLevel.INFO);
+                    }else if(check.getRegistry().equals("Unlisted")){
+                        context.status(403);
+                        String message = "EmployeeID{" + expense.getEmpId() + "} was found, but expenses may not be submitted at this time.";
+                        context.result(message);
+                        Logger.log(message, LogLevel.INFO);
+                    }
+                }
+            }catch(NullPointerException e){
+                e.printStackTrace();
                 context.status(404);
-                String message = "EmployeeID{"+expense.getEmpId()+"} was found, but expenses may not be submitted at this time.";
+                String message = "EmployeeID{"+expense.getEmpId()+"} was not found";
                 context.result(message);
                 Logger.log(message, LogLevel.INFO);
+                Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
         /* GET EXPENSES */
@@ -234,25 +250,6 @@ public class WebApp{
                 Logger.log(e.getMessage(), LogLevel.ERROR);
             }
         });
-//            String empId = context.pathParam("empId");
-//            try{
-//                String expenseJSON = gson.toJson(expenseService.expenseRegistryByEmpId(empId));
-//                if(expenseJSON.equals("null")){
-//                    context.status(404);
-//                    String message = "Expense ID{ "+empId+" } - not found";
-//                    context.result(message);
-//                    Logger.log(message, LogLevel.INFO);
-//                }else{
-//                    context.result(expenseJSON);
-//                }
-//            }catch(ResourceNotFound e){
-//                context.status(404);
-//                String message = "Expense ID{ "+empId+" } - not found";
-//                context.result(message);
-//                Logger.log(message, LogLevel.INFO);
-//                Logger.log(e.getMessage(), LogLevel.ERROR);
-//            }
-//        });
         /* PUT EXPENSES */
         app.put("/expenses/{expenseId}", context -> {
             System.out.println("Called PUT expense route!!");
