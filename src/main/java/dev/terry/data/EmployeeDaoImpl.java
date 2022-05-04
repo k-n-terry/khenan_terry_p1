@@ -108,13 +108,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
             Connection conn = ConnectUtil.createConnect();
 
             // SQL insertion into table: "employee"
-            String sql = "update employee set firstname=?, lastname=? where empId=?;";
+            String sql = "update employee set firstname=?, lastname=?, registry=? where empId=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // string parameters
             ps.setString(1, employee.getFirstname());
             ps.setString(2, employee.getLastname());
-            ps.setString(3, employee.getEmpId());
+            ps.setString(3, employee.getRegistry());
+            ps.setString(4, employee.getEmpId());
 
             ps.execute();
 
