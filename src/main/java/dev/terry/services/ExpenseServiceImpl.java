@@ -27,6 +27,10 @@ public class ExpenseServiceImpl implements ExpenseService{
         return this.expenseDao.readAllExpensesByEmpId(empId);
     }
     @Override
+    public List<Expense> expenseRegistryByStatus(String status){
+        return this.expenseDao.readAllExpensesByStatus(status);
+    }
+    @Override
     public Expense updateExpenseFields(Expense expense){
         return this.expenseDao.updateExpense(expense);
     }

@@ -69,7 +69,6 @@ public class WebApp{
         });
         // all
         app.get("/employees", context -> {
-            String registry = context.queryParam("registry");
             try{
                 List<Employee> employees = employeeService.employeeRegistry();
                 String employeesJSON = gson.toJson(employees);
@@ -224,10 +223,17 @@ public class WebApp{
         app.get("/expenses", context -> {
             String status = context.queryParam("status");
             try{
-                List<Expense> expenses = expenseService.expenseRegistry();
-                String expensesJSON = gson.toJson(expenses);
-                context.result(expensesJSON);
-                Logger.log("Called GET all expenses route!!", LogLevel.INFO);
+                if(status == null) {
+                    List<Expense> expenses = expenseService.expenseRegistry();
+                    String expensesJSON = gson.toJson(expenses);
+                    context.result(expensesJSON);
+                    Logger.log("Called GET all expenses route!!", LogLevel.INFO);
+                }else{
+                    List<Expense> expenses = expenseService.expenseRegistryByStatus(status);
+                    String expensesJSON = gson.toJson(expenses);
+                    context.result(expensesJSON);
+                    Logger.log("Called GET all expenses route!!", LogLevel.INFO);
+                }
             }catch(ResourceNotFound e){
                 context.status(404);
                 String message = "No expenses found";

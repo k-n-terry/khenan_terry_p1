@@ -10,6 +10,7 @@ public interface ExpenseDao{
     Expense readExpenseById(int expenseId);
     List<Expense> readAllExpenses();
     List<Expense> readAllExpensesByEmpId(String empId);
+    List<Expense> readAllExpensesByStatus(String status);
     // Update
     Expense updateExpense(Expense expense);
     Expense updateExpenseStatus(Expense expense);

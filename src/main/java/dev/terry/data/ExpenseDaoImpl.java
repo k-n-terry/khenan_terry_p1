@@ -139,6 +139,40 @@ public class ExpenseDaoImpl implements ExpenseDao{
             return null;
         }
     }
+    @Override
+    public List<Expense> readAllExpensesByStatus(String status){
+        try{
+            // connect to database: "khenan_terry_p1"
+            Connection conn = ConnectUtil.createConnect();
+
+            // SQL selection from table: "employee"
+            String sql = "select * from expense where status=?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,status);
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Expense> expenses = new ArrayList();
+
+            // while the result-set has a new line:
+            while(rs.next()){
+                // assign rs-results to fields in employee object
+                Expense expense = new Expense();
+                // set fields
+                expense.setExpenseId(rs.getInt("expenseId"));
+                expense.setEmpId(rs.getString("empId"));
+                expense.setExpenseLabel(rs.getString("expenseLabel"));
+                expense.setExpenseAmount(rs.getDouble("expenseAmount"));
+                expense.setStatus(rs.getString("status"));
+                expenses.add(expense);
+            }
+            return expenses;
+        }catch(SQLException e){
+            System.out.println("SQLException occured!!!");
+            Logger.log(e.getMessage(), LogLevel.ERROR);
+            return null;
+        }
+    }
     // UPDATE
     @Override
     public Expense updateExpense(Expense expense){

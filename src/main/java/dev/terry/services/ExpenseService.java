@@ -10,6 +10,7 @@ public interface ExpenseService{
 
     List<Expense> expenseRegistry();
     List<Expense> expenseRegistryByEmpId(String empId);
+    List<Expense> expenseRegistryByStatus(String status);
 
     Expense updateExpenseFields(Expense expense);
 
