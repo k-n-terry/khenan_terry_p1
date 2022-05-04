@@ -199,7 +199,6 @@ public class WebApp{
         /* GET EXPENSES */
         // by id
         app.get("/expenses/{expenseId}", context -> {
-            String status = context.queryParam("status");
             System.out.println();
             int expenseId = Integer.parseInt(context.pathParam("expenseId"));
             try{
@@ -223,11 +222,12 @@ public class WebApp{
         });
         // all
         app.get("/expenses", context -> {
-            System.out.println("Called GET all expenses route!!");
+            String status = context.queryParam("status");
             try{
                 List<Expense> expenses = expenseService.expenseRegistry();
                 String expensesJSON = gson.toJson(expenses);
                 context.result(expensesJSON);
+                Logger.log("Called GET all expenses route!!", LogLevel.INFO);
             }catch(ResourceNotFound e){
                 context.status(404);
                 String message = "No expenses found";
