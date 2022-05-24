@@ -35,7 +35,7 @@ jobs:
     - run: mvn package -Dmaven.test.skip --file pom.xml
     - run: mkdir artefact && cp target/*.jar artefact
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact
       with:
         name: Package
         path: staging
