@@ -28,11 +28,11 @@ jobs:
     - name: Build with Maven
       run: mvn package -Dmaven.test.skip --file pom.xml
       
-    - name: make new dir
-      run: mkdir artefact && cp target/*.jar artefact
+    #- name: make new dir
+      #run: target/*.jar target
 
     - name: Save to GitHub Packages Apache Maven
       uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: artefact
+        path: target
