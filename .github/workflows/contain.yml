@@ -37,7 +37,4 @@ jobs:
 
     - name: Upload My Thing
       uses: actions/upload-artifact@v3
-      with:
-        name: Package
-        path: target
 
