@@ -31,8 +31,8 @@ jobs:
     - name: Commit
       id: commit
       run:
-        git config --local user.email ""
-        git config --local user.name ""
+        git config --local user.email "khenan.n.terry@gmail.com"
+        git config --local user.name "k-n-terry"
         git add /target
         if [-z "$(git status --porcelain)"]; then
            echo "::set-output name=push::false"
