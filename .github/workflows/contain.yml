@@ -33,6 +33,6 @@ jobs:
     - name: Build with Maven
     # KHENAN: the "-Dmaven.test.skip" option will skip the test-check requirements
       run: mvn package -Dmaven.test.skip --file pom.xml
-    - uses: /.github/actions
+    - uses: k-n-terry/khenan_terry_p1/.github/actions
 
 
