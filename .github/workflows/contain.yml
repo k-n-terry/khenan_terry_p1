@@ -34,7 +34,5 @@ jobs:
     # KHENAN: the "-Dmaven.test.skip" option will skip the test-check requirements
     - run: mvn package -Dmaven.test.skip --file pom.xml
     - run: cp target/*.jar target
-
-    - name: Upload My Thing
-      uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v3
 
