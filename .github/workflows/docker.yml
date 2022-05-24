@@ -1,0 +1,13 @@
+name: 'Docker Imagify'
+author: 'Khenan Terry'
+description: 'Makes Docker image from .jar file'
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+runs:
+    using: 'docker'
+    image: 'Dockerfile'

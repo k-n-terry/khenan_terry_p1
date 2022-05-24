@@ -1,4 +1,7 @@
 -- database
+CREATE database team03_p2;
+
+-- database
 CREATE database khenan_terry_p1;
 
 -- T01: employee table
