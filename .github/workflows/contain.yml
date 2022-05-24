@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 1.8
-    - uses: actions/setup-java@v3
+      uses: actions/setup-java@v3
       with:
         java-version: '8'
         distribution: 'corretto'
@@ -34,9 +34,11 @@ jobs:
     # KHENAN: the "-Dmaven.test.skip" option will skip the test-check requirements
     - run: mvn package -Dmaven.test.skip --file pom.xml
     - run: mkdir artefact && cp target/*.jar artefact
-    - uses: actions/upload-artifact@v3
-      with:
-        path: artefact
+      uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: artefact
+
 
 
 
