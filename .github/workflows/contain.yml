@@ -36,6 +36,5 @@ jobs:
     - run: mkdir artefact && cp target/*.jar artefact
     - uses: actions/upload-artifact@v3
       with:
-        name: Package
         path: staging
 
