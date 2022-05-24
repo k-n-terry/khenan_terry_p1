@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'coretto'
+        distribution: 'corretto'
         cache: maven
     - name: Build with Maven
     # KHENAN: the "-Dmaven.test.skip" option will skip the test-check requirements
